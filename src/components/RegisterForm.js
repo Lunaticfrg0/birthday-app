@@ -17,7 +17,7 @@ export default function RegisterForm(props){
     const [formError, setFromError] = useState({});
 
     const registering = () =>{
-        //nos permite llevar constancia de que inputs les falta valor
+        //nos permite llevar constancia de que inputs les falta valor o no son validos
         let error = {} ;
         //si uno de los campos esta vacio === null
         //Ira asignando como true a error.x para asignarle el color de error al input
@@ -40,9 +40,7 @@ export default function RegisterForm(props){
         } else{
             firebase.auth()
             .createUserWithEmailAndPassword(formData.email, formData.password)
-            .then(()=>{
-                console.log("Cuenta creada");
-            }).catch(() =>{
+            .catch(() =>{
                 setFromError({
                     email: true,
                     password: true,
@@ -57,7 +55,7 @@ export default function RegisterForm(props){
             <TextInput
                 // Si formError.email === true se aplica el styles.error
                 style ={[styles.input, formError.email && styles.errorInput]}
-                placeholder= "Correo Electronico"
+                placeholder= "Correo electronico"
                 placeholderTextColor = "#969696"
                 //Una vez que cambie el input activara el cambio de estado
                 //setFormData hara que cambie cada propiedad del objeto formData
@@ -79,13 +77,13 @@ export default function RegisterForm(props){
                 onChange = {(e) => setFormData({...formData, repeatedpassword: e.nativeEvent.text})}
 
             />
-            <TouchableOpacity>
-            <Text style={styles.btnText} onPress = {registering}>Registrarse</Text>
+            <TouchableOpacity onPress = {registering}>
+            <Text style={styles.btnText}>Registrarse</Text>
             </TouchableOpacity>
             
             <View style ={styles.loginbtn}>
-            <TouchableOpacity>
-            <Text style={styles.btnText} onPress = {changeForm}>Iniciar sesion</Text>
+            <TouchableOpacity onPress = {changeForm}>
+            <Text style={styles.btnText} >Iniciar sesion</Text>
             </TouchableOpacity>
             </View>
            
