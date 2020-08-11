@@ -7,11 +7,17 @@ import {
   Text,
   StatusBar,
   Button,
+  YellowBox
 } from 'react-native';
+import {decode, encode} from 'base-64';
 import Auth from './src/components/Auth';
+import BirthdayList from "./src/components/BirthdayList";
 import firebase from "./src/utils/firebase";
 import "firebase/auth";
 
+if(!global.btoa)global.btoa = encode;
+if (!global.atob)global.atob= decode;
+YellowBox.ignoreWarnings(["Setting a timer for a long period of time"]);
 
 export default function App(){
   //Hook de estado para saber si el estado esta logeado
@@ -29,23 +35,11 @@ export default function App(){
     <>
       <StatusBar barStyle = 'ligth-content'/>
       <SafeAreaView style = {styles.background}>
-      {user ? <Logout/> : <Auth/>}
+      {user ? <BirthdayList/> : <Auth/>}
       </SafeAreaView>
     </>
   );
 };
-
-function Logout(){
-  const logout = () =>{
-    firebase.auth().signOut();
-  }
-  return(
-    <View>
-      <Text>Estas logueado</Text>
-      <Button title = "Cerrar sesion" onPress = {logout}/>
-    </View>
-  )
-}
 
 const styles = StyleSheet.create({
   background: {
