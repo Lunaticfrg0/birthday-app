@@ -35,7 +35,7 @@ export default function App(){
     <>
       <StatusBar barStyle = 'ligth-content'/>
       <SafeAreaView style = {styles.background}>
-      {user ? <BirthdayList/> : <Auth/>}
+      {user ? <BirthdayList user = {user} /> : <Auth/>}
       </SafeAreaView>
     </>
   );
