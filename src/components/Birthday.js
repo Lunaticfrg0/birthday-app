@@ -13,6 +13,7 @@ import {
 export default function Birthday(props){
     const {birthday, deleteBirthday} = props;
     const past = birthday.days > 0 ? true : false;
+    const empty = " ";
 
     const infoDay = ()=>{
         if (birthday.days === 0) {
@@ -37,7 +38,7 @@ export default function Birthday(props){
         onPress = {() => deleteBirthday(birthday)}
         >
             <Text style = {styles.name}>
-            {birthday.name} {birthday.lastname}
+            {birthday.name}{empty}{birthday.lastname}
             </Text>
             {past ? <Text style = {{color: "#fff"}} >Pasado</Text> : infoDay()}
         </TouchableOpacity>
